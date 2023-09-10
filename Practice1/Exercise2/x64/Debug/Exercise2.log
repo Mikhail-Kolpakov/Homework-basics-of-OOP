@@ -1,0 +1,10 @@
+﻿  Exercise2.cpp
+F:\Миша\Основи об'єктно-орієнтованого програмування\Practice1\Exercise2\Exercise2.cpp(21,46): warning C4101: cylinder_volume: неиспользованная локальная переменная
+F:\Миша\Основи об'єктно-орієнтованого програмування\Practice1\Exercise2\Exercise2.cpp(21,31): warning C4101: sphere_volume: неиспользованная локальная переменная
+F:\Миша\Основи об'єктно-орієнтованого програмування\Practice1\Exercise2\Exercise2.cpp(21,8): warning C4101: parallelepiped_volume: неиспользованная локальная переменная
+F:\Миша\Основи об'єктно-орієнтованого програмування\Practice1\Exercise2\Exercise2.cpp(58,15): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+F:\Миша\Основи об'єктно-орієнтованого програмування\Practice1\Exercise2\Exercise2.cpp(64,15): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+F:\Миша\Основи об'єктно-орієнтованого програмування\Practice1\Exercise2\Exercise2.cpp(69,15): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+F:\Миша\Основи об'єктно-орієнтованого програмування\Practice1\Exercise2\Exercise2.cpp(79,15): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+F:\Миша\Основи об'єктно-орієнтованого програмування\Practice1\Exercise2\Exercise2.cpp(84,15): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+  Exercise2.vcxproj -> F:\Миша\Основи об'єктно-орієнтованого програмування\Practice1\Exercise2\x64\Debug\Exercise2.exe

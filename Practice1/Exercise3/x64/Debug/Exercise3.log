@@ -1,0 +1,3 @@
+﻿  Exercise3.cpp
+F:\Миша\Основи об'єктно-орієнтованого програмування\Practice1\Exercise3\Exercise3.cpp(21,48): warning C4305: аргумент: усечение из "double" в "float"
+  Exercise3.vcxproj -> F:\Миша\Основи об'єктно-орієнтованого програмування\Practice1\Exercise3\x64\Debug\Exercise3.exe
