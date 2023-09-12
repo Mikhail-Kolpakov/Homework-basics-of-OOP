@@ -50,6 +50,11 @@ int main()
     print_values(x, N, is_changed, TypeOfArray::X);
     print_values(y, N, is_changed, TypeOfArray::Y);
 
+    delete [] x;
+    x = nullptr;
+    delete [] y;
+    y = nullptr;
+
     cout << endl;
 }
 
