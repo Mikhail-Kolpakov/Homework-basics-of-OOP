@@ -1,0 +1,3 @@
+﻿G:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (Exercise 1.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  Exercise 1.cpp
+  Exercise 1.vcxproj -> F:\Миша\Основи об'єктно-орієнтованого програмування\Homework-basics-of-OOP\Practice4\Exercise1\x64\Debug\Exercise1.exe
