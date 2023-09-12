@@ -48,7 +48,7 @@ int main()
 
     z = static_cast<float>(exp(s1) + exp(s2)) / (k1 * k2);
 
-    cout << endl << endl << "Z = " << fixed << setprecision(2) << z << endl;
+    cout << endl << "Z = " << fixed << setprecision(2) << z << endl;
 }
 
 void input(int array[], int length, TypeOfArray type_of_array) { //Функція для заповнення масиву числами з клавіатури

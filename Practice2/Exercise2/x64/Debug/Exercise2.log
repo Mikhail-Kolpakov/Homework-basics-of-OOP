@@ -1,5 +1,1 @@
-﻿  Exercise2.cpp
-F:\Миша\Основи об'єктно-орієнтованого програмування\Homework-basics-of-OOP\Practice 2\Exercise2\Exercise2.cpp(51,42): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-F:\Миша\Основи об'єктно-орієнтованого програмування\Homework-basics-of-OOP\Practice 2\Exercise2\Exercise2.cpp(52,42): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-F:\Миша\Основи об'єктно-орієнтованого програмування\Homework-basics-of-OOP\Practice 2\Exercise2\Exercise2.cpp(53,42): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-  Exercise2.vcxproj -> F:\Миша\Основи об'єктно-орієнтованого програмування\Homework-basics-of-OOP\Practice 2\Exercise2\x64\Debug\Exercise2.exe
+﻿  Exercise2.vcxproj -> F:\Миша\Основи об'єктно-орієнтованого програмування\Homework-basics-of-OOP\Practice2\Exercise2\x64\Debug\Exercise2.exe
