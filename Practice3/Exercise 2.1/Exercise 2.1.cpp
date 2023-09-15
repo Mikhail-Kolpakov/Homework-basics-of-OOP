@@ -5,21 +5,15 @@
 
 using namespace std;
 
-inline float calculate(float first_num, float second_num, char operaton) {
-    switch (operaton) {
-        case '+':
-            return first_num + second_num;
-            break;
-        case '-':
-            return first_num - second_num;
-            break;
-        case '*':
-            return first_num * second_num;
-            break;
-        case '/':
-            return first_num / second_num;
-            break;
-    }
+inline float calculate(float first_num, float second_num, char operation) {
+    if (operation == '+')
+        return first_num + second_num;
+    else if (operation == '-')
+        return first_num - second_num;
+    else if (operation == '*')
+        return first_num * second_num;
+    else 
+        return first_num / second_num;
 }
 
 int main()
@@ -41,6 +35,6 @@ int main()
     cout << "Введіть другое число: ";
     cin >> second_num;
 
-    cout << endl << "Після побчислень відповідь дорівнює: " << fixed << setprecision(2) <<
+    cout << endl << "Після обчислень відповідь дорівнює: " << fixed << setprecision(2) <<
         calculate(first_num, second_num, operation) << endl;
 }
