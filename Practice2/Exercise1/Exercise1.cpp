@@ -32,9 +32,7 @@ int main()
     for (int number : x)
         cout << number << " ";
 
-    f_pointer(x, LengthX, &s1, &k1);
-    cout << endl << endl << "Сума непарних елементів: " << s1 << endl << 
-        "Кількість непарних елементів: " << k1 << endl << endl;
+    cout << endl << endl;
 
     input(y, LengthY, TypeOfArray::Y);
 
@@ -42,13 +40,25 @@ int main()
     for (int number : y)
         cout << number << " ";
 
+    cout << endl << endl << "Обробка масивів з використанням покажчиків: "; //Через покажчики
+    f_pointer(x, LengthX, &s1, &k1);
+    cout << endl << "Сума непарних елементів масиву X: " << s1 << endl << 
+        "Кількість непарних елементів масиву X: " << k1;
+    f_pointer(y, LengthY, &s2, &k2);
+    cout << endl << endl << "Сума непарних елементів масиву Y: " << s2 << endl <<
+        "Кількість непарних елементів масиву Y: " << k2 << endl << endl;
+
+    cout << "Обробка масивів з використанням посилань: "; //Через посилання
+    f_reference(x, LengthX, s1, k1);
+    cout << endl << "Сума непарних елементів масиву X: " << s1 << endl <<
+        "Кількість непарних елементів масиву X: " << k1;
     f_reference(y, LengthY, s2, k2);
-    cout << endl << endl << "Сума непарних елементів: " << s2 << endl <<
-        "Кількість непарних елементів: " << k2 << endl;
+    cout << endl << endl << "Сума непарних елементів масиву Y: " << s2 << endl <<
+        "Кількість непарних елементів масиву Y: " << k2;
 
     z = static_cast<float>(exp(s1) + exp(s2)) / (k1 * k2);
 
-    cout << endl << "Z = " << fixed << setprecision(2) << z << endl;
+    cout << endl << endl << "Z = " << fixed << setprecision(2) << z << endl;
 }
 
 void input(int array[], int length, TypeOfArray type_of_array) { //Функція для заповнення масиву числами з клавіатури
