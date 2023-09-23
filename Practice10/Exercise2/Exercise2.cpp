@@ -109,6 +109,4 @@ int main()
 
     trial = &history_test;
     trial->output();
-
-    delete trial;
 }

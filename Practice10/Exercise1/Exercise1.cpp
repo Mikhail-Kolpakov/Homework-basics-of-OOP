@@ -89,6 +89,4 @@ int main()
 
     transport = &transport_bus;
     transport->output();
-
-    delete transport;
 }
