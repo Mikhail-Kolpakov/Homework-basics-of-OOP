@@ -1,0 +1,5 @@
+﻿  Exercise2.cpp
+F:\Миша\Основи об'єктно-орієнтованого програмування\Homework-basics-of-OOP\Practice11\Exercise2\Exercise2.cpp(47): warning C4305: инициализация: усечение из "double" в "const float"
+F:\Миша\Основи об'єктно-орієнтованого програмування\Homework-basics-of-OOP\Practice11\Exercise2\Exercise2.cpp(66): warning C4305: инициализация: усечение из "double" в "const float"
+F:\Миша\Основи об'єктно-орієнтованого програмування\Homework-basics-of-OOP\Practice11\Exercise2\Exercise2.cpp(86): warning C4305: инициализация: усечение из "double" в "const float"
+  Exercise2.vcxproj -> F:\Миша\Основи об'єктно-орієнтованого програмування\Homework-basics-of-OOP\Practice11\Exercise2\x64\Debug\Exercise2.exe
