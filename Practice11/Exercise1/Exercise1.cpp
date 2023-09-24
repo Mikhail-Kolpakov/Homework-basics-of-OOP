@@ -71,7 +71,7 @@ public:
     }
 
     void output() const override { //Функція для виводу даних
-        cout << "Інформація щодо ракетного катера: " << endl;
+        cout << "Інформація щодо пасажирського лайнера: " << endl;
         cout << "Назва: " << name << endl;
         cout << "Країна якій належить: " << belong_to_country << endl;
         cout << "Вага: " << fixed << setprecision(2) << weight << " т." << endl;
