@@ -44,12 +44,18 @@ istream& operator >> (istream& stream, processor& proc) {
 ostream& operator << (ostream& stream, const processor& proc) {
     cout << "Інформація щодо процесора: " << endl;
     cout << "Фірма-виробник: " << proc.manufacturer << endl;
+    cout << setw(20);
+    cout.setf(ios::left);
     cout << "Назва: " << proc.name << endl;
     cout << "Кількість ядер: " << proc.cores_number << " шт." << endl;
     cout << "Кількість потоків: " << proc.streams_number << " шт." << endl;
-    cout << "Частота роботи: " << fixed << setprecision(1) << proc.min_frequency << " — " 
+    cout.setf(ios::fixed);
+    cout.setf(ios::showpoint);
+    cout.setf(ios::showpos);
+    cout << "Частота роботи: " << setprecision(1) << proc.min_frequency << " — " 
         << proc.max_frequency << " ГГц." << endl;
-    cout << "Енергоспоживання: " << proc.energy_consumption << " Вт." << endl;
+    cout.unsetf(ios::showpos);
+    cout << "Енергоспоживання: " << oct << proc.energy_consumption << " Вт." << endl;
 
     return stream;
 }
