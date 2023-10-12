@@ -1,0 +1,2 @@
+F:\Миша\Програмування мовою Python\Programming-in-the-Python-language\Course_Work\x64\Debug\Course_Work.exe
+F:\Миша\Основи об'єктно-орієнтованого програмування\Homework-basics-of-OOP\Course_Work\x64\Debug\Course_Work.exe
