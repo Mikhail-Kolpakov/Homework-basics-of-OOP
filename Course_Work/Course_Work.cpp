@@ -98,16 +98,16 @@ public:
 
         input_file >> u >> f >> C >> tg_delta;
 
+        if (input_file.fail()) { //Перевіряємо успішність операції зчитування
+            cout << "Виникла помилка при зчитування даних з файлу " << file_name << endl;
+            exit(1);
+        }
+
         //Робимо перевірки зчитаних даних на коректність
         check_limits_of_value(u, u_limits.min_value, u_limits.max_value, "u", "");
         check_limits_of_value(f, f_limits.min_value, f_limits.max_value, "f", "");
         check_limits_of_value(C, C_limits.min_value, C_limits.max_value, "C", " * 10^(-12)");
         check_limits_of_value(tg_delta, tg_delta_limits.min_value, tg_delta_limits.max_value, "tg_delta", " * 10^(-3)");
-
-        if (input_file.fail()) { //Перевіряємо успішність операції зчитування
-            cout << "Виникла помилка при зчитування даних з файлу " << file_name << endl;
-            exit(1);
-        }
 
         input_file.close(); //Закриваємо файл
     }
