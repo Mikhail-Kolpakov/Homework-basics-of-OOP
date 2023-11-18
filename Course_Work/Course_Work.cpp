@@ -19,7 +19,7 @@ public:
 //Абстрактний клас, що характерихує об'єкт обчислення
 class calculation_object {
 protected:
-    float calculation_parameter[AMOUNT_OF_ITERATIONS]; //Обчислювальний параметр (активна потужність P_alpha)
+    float calculation_parameter[AMOUNT_OF_ITERATIONS]{}; //Обчислювальний параметр (активна потужність P_alpha)
 
 public:
     //Чисті віртуальні функції
@@ -44,7 +44,7 @@ private:
     const range C_limits = { 1000, 4000 };
     const range tg_delta_limits = { 1, 8 };
 
-    float u_value_storage[AMOUNT_OF_ITERATIONS]; //Сберігання значень параметру діючого значення змінної напруги u
+    float u_value_storage[AMOUNT_OF_ITERATIONS]{}; //Сберігання значень параметру діючого значення змінної напруги u
 
     void check_limits_of_value(float value, float min_value, float max_value, const char* variable_name, const char* degree) { //Метод для перевірки зчитаного значення на коректність
         if (value < min_value || value > max_value) {
