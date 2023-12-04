@@ -92,10 +92,10 @@ istream& operator >> (istream& stream, rectangle& rect) {
 }
 
 istream& operator >> (istream& stream, parallelogram& par) {
-    cout << "Введіть дані для прямокутника: " << endl;
+    cout << "Введіть дані для паралелограма: " << endl;
     cout << "Довжина: ";
     stream >> par.length;
-    cout << "Ширина: ";
+    cout << "Висота: ";
     stream >> par.height;
 
     return stream;
