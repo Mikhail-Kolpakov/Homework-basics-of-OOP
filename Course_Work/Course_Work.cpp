@@ -18,8 +18,9 @@ public:
 
 //Перерахування для контролю, чи потрібно відображати табуляцію
 enum class display_tab {
-    Yes,
-    No
+    PrintFull,
+    PrintBegin,
+    NotPrint
 };
 
 //Абстрактний клас, що характерихує об'єкт обчислення
@@ -31,7 +32,7 @@ public:
     //Чисті віртуальні функції
     virtual void read_from_file(const char* file_name) = 0; //Функція для введення даних із файлу
     virtual void calculation_of_the_parameter() = 0; //Функція для розрахунку обчислювального параметра
-    virtual void write_to_file(const char* file_name, const char* object_name, bool with_results, display_tab tab) const = 0; //Функція для виведення результату та вхідних даних до файлу
+    virtual void write_to_file(const char* file_name, const char* object_name, display_tab tab) const = 0; //Функція для виведення результату та вхідних даних до файлу
     
     virtual ~calculation_object() {} //Створюємо віртуальний деструктор
 };
@@ -136,7 +137,7 @@ public:
         }
     }
 
-    void write_to_file(const char* file_name, const char* object_name, bool with_results, display_tab tab = display_tab::No) const override { //Метод для дозапису даних до файлу
+    void write_to_file(const char* file_name, const char* object_name, display_tab tab = display_tab::NotPrint) const override { //Метод для дозапису даних до файлу
         ofstream output_file(file_name, ios::app); //Використовуємо конструктор класу ofstream для відкриття файлу для дозапису
 
         if (!output_file.is_open()) { //Якщо файл не відкрився
@@ -151,14 +152,15 @@ public:
         output_file << "C = " << C << " * 10^(-12) ф" << endl;
         output_file << "tg_delta = " << tg_delta << " * 10^(-3)" << endl << endl;
 
-        if (with_results) {
-            //Заносимо результати розрахунків
+        //Заносимо результати розрахунків
+        if (tab == display_tab::PrintFull) {
             output_file << "Результати розрахунків: " << endl;
-            if (tab == display_tab::Yes)
-                for (int i = 0; i < AMOUNT_OF_ITERATIONS; i++)
-                    output_file << fixed << setprecision(4) << i + 1 << ".\tu = " << u_value_storage[i] << "\t\tP_alpha = " << calculation_parameter[i] << endl;
-            else
-                output_file << fixed << setprecision(4) << "u = " << u_value_storage[0] << "\t\tP_alpha = " << calculation_parameter[0] << endl;
+            for (int i = 0; i < AMOUNT_OF_ITERATIONS; i++)
+                output_file << fixed << setprecision(4) << i + 1 << ".\tu = " << u_value_storage[i] << "\t\tP_alpha = " << calculation_parameter[i] << endl;
+        }
+        else if (tab == display_tab::PrintBegin) {
+            output_file << "Результати розрахунків: " << endl;
+            output_file << fixed << setprecision(4) << "u = " << u_value_storage[0] << "\t\tP_alpha = " << calculation_parameter[0] << endl;
         }
 
         output_file.close(); //Закриваємо файл
@@ -231,26 +233,26 @@ int main()
     //Перевірка роботи різних видів конструкторів
     output_app_file << endl << "---------------Тестування роботи конструкторів---------------" << endl << endl;
     output_app_file << "Пустий конструктор: " << endl;
-    a.write_to_file(output_file_name, "a", false);
+    a.write_to_file(output_file_name, "a");
     output_app_file << "Конструктор ініціалізації списком: " << endl;
-    b.write_to_file(output_file_name, "b", false);
+    b.write_to_file(output_file_name, "b");
     output_app_file << "Конструктор копіювання: " << endl;
-    d.write_to_file(output_file_name, "d", false);
+    d.write_to_file(output_file_name, "d");
 
     output_app_file << endl << "---------------Тестування зчитування з файлу---------------" << endl << endl;
 
     a.read_from_file(input_file_name); //Зчитуємо вхідні дані з файлу
     a.calculation_of_the_parameter(); //Робимо розрахунки на основі зчитаних даних
     output_app_file << "Дані для об'єкту a були зчитані з файлу" << endl << endl;
-    a.write_to_file(output_file_name, "a", true, display_tab::Yes); //Записуємо вхідні дані та результати розрахунків у вихідний файл
+    a.write_to_file(output_file_name, "a", display_tab::PrintFull); //Записуємо вхідні дані та результати розрахунків у вихідний файл
 
     //Демонструємо роботу перевантажених операторів
     output_app_file << endl << endl << "---------------Тестування перевантажених операторів---------------" << endl << endl;
     output_app_file << "Інформація щодо об'єкту X: " << endl;
-    b.write_to_file(output_file_name, "b", true);
+    b.write_to_file(output_file_name, "b", display_tab::PrintBegin);
 
     output_app_file << endl << "Інформація щодо об'єкту Y: " << endl;
-    c.write_to_file(output_file_name, "c", true);
+    c.write_to_file(output_file_name, "c", display_tab::PrintBegin);
 
     output_app_file << endl << "Оператор == між об'єктом X та Y: " << endl;
     output_app_file << "Результат = " << boolalpha << (b == c) << endl << endl;
@@ -273,5 +275,5 @@ int main()
     d.input(); //Перевірка роботи функцій для встановлення значень вручну
     output_app_file << endl << "---------------Тестування зчитування з клавіатури---------------" << endl << endl;
     d.calculation_of_the_parameter();
-    d.write_to_file(output_file_name, "d", true, display_tab::Yes);
+    d.write_to_file(output_file_name, "d", display_tab::PrintFull);
 }
