@@ -16,6 +16,12 @@ public:
     float max_value;
 };
 
+//Перерахування для контролю, чи потрібно відображати табуляцію
+enum class display_tab {
+    Yes,
+    No
+};
+
 //Абстрактний клас, що характерихує об'єкт обчислення
 class calculation_object {
 protected:
@@ -25,7 +31,7 @@ public:
     //Чисті віртуальні функції
     virtual void read_from_file(const char* file_name) = 0; //Функція для введення даних із файлу
     virtual void calculation_of_the_parameter() = 0; //Функція для розрахунку обчислювального параметра
-    virtual void write_to_file(const char* file_name, const char* object_name, bool with_results) const = 0; //Функція для виведення результату та вхідних даних до файлу
+    virtual void write_to_file(const char* file_name, const char* object_name, bool with_results, display_tab tab) const = 0; //Функція для виведення результату та вхідних даних до файлу
     
     virtual ~calculation_object() {} //Створюємо віртуальний деструктор
 };
@@ -56,7 +62,13 @@ private:
 public:
     dielectric() {} //Порожній конструктор
     
-    dielectric(float a, float b, float c, float d) : u(a), f(b), C(c), tg_delta(d) {} //Конструктор з ініціалізацією списком
+    dielectric(float a, float b, float c, float d) : u(a), f(b), C(c), tg_delta(d) { //Конструктор з ініціалізацією списком
+        //Робимо перевірки отриманих даних на коректність
+        check_limits_of_value(a, u_limits.min_value, u_limits.max_value, "u", "");
+        check_limits_of_value(b, f_limits.min_value, f_limits.max_value, "f", "");
+        check_limits_of_value(c, C_limits.min_value, C_limits.max_value, "C", " * 10^(-12)");
+        check_limits_of_value(d, tg_delta_limits.min_value, tg_delta_limits.max_value, "tg_delta", " * 10^(-3)");
+    }
     
     dielectric(const dielectric& src) { //Конструктор копіювання
         u = src.u;
@@ -124,7 +136,7 @@ public:
         }
     }
 
-    void write_to_file(const char* file_name, const char* object_name, bool with_results) const override { //Метод для дозапису даних до файлу
+    void write_to_file(const char* file_name, const char* object_name, bool with_results, display_tab tab = display_tab::No) const override { //Метод для дозапису даних до файлу
         ofstream output_file(file_name, ios::app); //Використовуємо конструктор класу ofstream для відкриття файлу для дозапису
 
         if (!output_file.is_open()) { //Якщо файл не відкрився
@@ -142,8 +154,11 @@ public:
         if (with_results) {
             //Заносимо результати розрахунків
             output_file << "Результати розрахунків: " << endl;
-            for (int i = 0; i < AMOUNT_OF_ITERATIONS; i++)
-                output_file << fixed << setprecision(4) << i + 1 << ".\tu = " << u_value_storage[i] << "\t\tP_alpha = " << calculation_parameter[i] << endl;
+            if (tab == display_tab::Yes)
+                for (int i = 0; i < AMOUNT_OF_ITERATIONS; i++)
+                    output_file << fixed << setprecision(4) << i + 1 << ".\tu = " << u_value_storage[i] << "\t\tP_alpha = " << calculation_parameter[i] << endl;
+            else
+                output_file << fixed << setprecision(4) << "u = " << u_value_storage[0] << "\t\tP_alpha = " << calculation_parameter[0] << endl;
         }
 
         output_file.close(); //Закриваємо файл
@@ -151,33 +166,27 @@ public:
 
     //Перевантаження операторів за допомогою методів класу
     bool operator == (const dielectric& other) const { //Перевантаження оператора ==
-        return !(*this < other) && !(other < *this);
+        return calculation_parameter[0] == other.calculation_parameter[0];
     }
 
     bool operator != (const dielectric& other) const { //Перевантаження оператора !=
-        return !(*this == other);
+        return calculation_parameter[0] != other.calculation_parameter[0];
     }
 
     bool operator > (const dielectric& other) const { //Перевантаження оператора >
-        return other < *this;
+        return calculation_parameter[0] > other.calculation_parameter[0];
     }
 
     bool operator < (const dielectric& other) const { //Перевантаження оператора <
-        bool temp = true;
-
-        for (int i = 0; i < AMOUNT_OF_ITERATIONS; i++)
-            if (!(calculation_parameter[i] < other.calculation_parameter[i]))
-                temp = false;
-
-        return temp;
+        return calculation_parameter[0] < other.calculation_parameter[0];
     }
 
     bool operator >= (const dielectric& other) const { //Перевантаження оператора >=
-        return !(*this < other);
+        return calculation_parameter[0] >= other.calculation_parameter[0];
     }
 
     bool operator <= (const dielectric& other) const { //Перевантаження оператора <=
-        return !(*this > other);
+        return calculation_parameter[0] <= other.calculation_parameter[0];
     }
 
     dielectric& operator = (const dielectric& other) { //Перевантаження оператора =
@@ -220,7 +229,7 @@ int main()
     }
 
     //Перевірка роботи різних видів конструкторів
-    output_app_file << "---------------Тестування роботи конструкторів---------------" << endl << endl;
+    output_app_file << endl << "---------------Тестування роботи конструкторів---------------" << endl << endl;
     output_app_file << "Пустий конструктор: " << endl;
     a.write_to_file(output_file_name, "a", false);
     output_app_file << "Конструктор ініціалізації списком: " << endl;
@@ -233,7 +242,7 @@ int main()
     a.read_from_file(input_file_name); //Зчитуємо вхідні дані з файлу
     a.calculation_of_the_parameter(); //Робимо розрахунки на основі зчитаних даних
     output_app_file << "Дані для об'єкту a були зчитані з файлу" << endl << endl;
-    a.write_to_file(output_file_name, "a", true); //Записуємо вхідні дані та результати розрахунків у вихідний файл
+    a.write_to_file(output_file_name, "a", true, display_tab::Yes); //Записуємо вхідні дані та результати розрахунків у вихідний файл
 
     //Демонструємо роботу перевантажених операторів
     output_app_file << endl << endl << "---------------Тестування перевантажених операторів---------------" << endl << endl;
@@ -264,5 +273,5 @@ int main()
     d.input(); //Перевірка роботи функцій для встановлення значень вручну
     output_app_file << endl << "---------------Тестування зчитування з клавіатури---------------" << endl << endl;
     d.calculation_of_the_parameter();
-    d.write_to_file(output_file_name, "d", true);
+    d.write_to_file(output_file_name, "d", true, display_tab::Yes);
 }
