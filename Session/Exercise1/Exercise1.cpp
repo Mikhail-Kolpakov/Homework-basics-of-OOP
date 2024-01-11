@@ -57,7 +57,7 @@ private:
 
 public:
     void inputData() override {
-        cout << "Введіть значення для вимірів киліндра: " << endl;
+        cout << "Введіть значення для вимірів циліндра: " << endl;
         cout << "Введіть радіус: ";
         cin >> radius;
         cout << "Введіть висоту: ";
